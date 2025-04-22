@@ -6,7 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body>    
     <div class="container">
         <div class="head">Cities</div>
         <div class="content">
@@ -19,11 +19,33 @@
             </div>
             <div class="principal">
                 <h1>Lorem</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis, ipsam quaerat est optio officiis molestiae, ratione soluta a expedita dolor cumque nesciunt nobis culpa accusantium doloribus, iste exercitationem necessitatibus earum?</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores voluptates, non at esse, rerum nam error modi vel officia laboriosam nobis cupiditate beatae quis iusto ipsam et quaerat ea expedita!</p>
+                <p class="descricao">Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis, ipsam quaerat est optio officiis molestiae, ratione soluta a expedita dolor cumque nesciunt nobis culpa accusantium doloribus, iste exercitationem necessitatibus earum?</p>
+                <p class="descricao">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores voluptates, non at esse, rerum nam error modi vel officia laboriosam nobis cupiditate beatae quis iusto ipsam et quaerat ea expedita!</p>
             </div>
         </div>
         <div class="footer">footer</div>
     </div>
+
+    <button onclick="esconderDescricao()">esconder descrição</button>
+
+    <script>
+        let isHidden = false;
+        function esconderDescricao(){
+            let descricoes = document.getElementsByClassName("descricao");
+            
+            if(isHidden){
+                for(let i = 0; i < descricoes.length; i++){
+                descricoes[i].style.display = "block"
+                isHidden = false;
+            }
+            }
+            else{
+                for(let i = 0; i < descricoes.length; i++){
+                descricoes[i].style.display = "none"
+                isHidden = true;
+            }
+            }
+        }
+    </script>
 </body>
 </html>

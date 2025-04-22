@@ -46,3 +46,7 @@ body{
     text-decoration: none;
     color: rgb(104, 104, 255);
 }
+
+.descricao{
+    display: block;
+}
