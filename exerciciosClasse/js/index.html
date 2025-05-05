@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style1.css" id="tema">
+</head>
+<body>
+    <button onclick="toggle()">toggle</button>
+    <p id="p-01">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet aperiam laborum provident sit, amet asperiores dolores quae harum dolor. Voluptatum eligendi qui dolorum, dolore illum tempora eius modi atque rem.</p>
+    
+    <script>
+        function toggle() {
+           let link = document.getElementById("tema")
+           if(link.href.endsWith("style1.css")){
+                link.href = "style2.css"
+           }
+           else{
+                link.href = "style1.css"
+           }
+        }
+    </script>
+</body>
+</html>
