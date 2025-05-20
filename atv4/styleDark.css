@@ -1,4 +1,4 @@
-body{
+body{ /*estilização geral*/
     font-family: Arial, Helvetica, sans-serif;
     background-color: #ddd;
     margin: 0;
@@ -19,7 +19,7 @@ body{
     text-align: center;
 }
 
-.navbar{
+.navbar{/*usa o sticky para deixar a navbar no topo e esse justify que ajuda a deixar o sumario mais ao meio e o butao no fim*/
     position: sticky;
     top: 0;
     background-color: #4D4D4D;
@@ -27,18 +27,18 @@ body{
     justify-content: center;
 }
 
-.navbar ul{
+.navbar ul{/*lista para o sumário*/
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
 }
 
-.navbar li{
+.navbar li{/*deixa a lista da esquerda para direita*/
     float: left;
 }
 
-.navbar a{
+.navbar a{/*estiliza os links do sumário*/
     display: block;
     color: #ddd;
     text-align: center;
@@ -51,11 +51,11 @@ body{
     color: #333;
 }
 
-.links{
-    margin: 0 auto;
+.links{ /*deixa o sumário mais para o meio*/
+    margin: 10px auto;
 }
 
-.modeSwitch{
+.modeSwitch{ /*deixa o botão no final*/
     flex-direction: row-reverse;
     padding: 15px;
 }
@@ -65,7 +65,6 @@ body{
     color: #ddd;
     padding: 10px 20px;
     border-radius: 5px;
-    cursor: pointer;
     border: none;
 }
 
@@ -75,7 +74,7 @@ body{
     border-color: #ddd;
 }
 
-.main{
+.main{ /*deixa o conteudo principal (sobre e o texto maior) linha ao inves do coluna do resto */
     display: flex;
     flex-direction: row;
 }
@@ -83,7 +82,7 @@ body{
 .about{
     background-color: #1A1A1A;
     padding: 20px;
-    flex: 30%;
+    flex: 30%; /*vai ocupar 30% da tela*/
 }
 
 .content{
@@ -122,7 +121,7 @@ body{
     text-align: center;
 }
 
-@media screen and (max-width: 800px) { /* menor que a 400 */
+@media screen and (max-width: 800px) { /* deixa o conteudo da main no estilo coluna para facilitar leitura*/
     .navbar li{
         flex-direction: column;
     }
