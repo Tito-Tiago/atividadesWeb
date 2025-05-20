@@ -14,7 +14,7 @@ body{
 }
 
 .header{
-    background-color: #1abc9c;
+    background-color: #020202;
     text-align: center;
     color: #ddd;
 }
@@ -24,6 +24,7 @@ body{
     top: 0;
     background-color: #333;
     display: flex;
+    justify-content: space-between;
 }
 
 .navbar ul{
@@ -49,6 +50,31 @@ body{
     background-color: #ddd;
     color: #333;
 }
+
+.links{
+    margin: 0 auto;
+}
+
+.modeSwitch{
+    flex-direction: row-reverse;
+    padding: 15px;
+}
+
+.navbar button {
+    background-color: #020202;
+    color: #ddd;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+}
+
+.navbar button:hover {
+    background-color: #888888;
+    color: #020202;
+    border-color: #ddd;
+}
+
 
 .main{
     display: flex;

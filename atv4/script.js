@@ -1,6 +1,6 @@
 function toggleModes(){
-    let tema = getElementById("tema")
-    if(link.href.endsWith("styleLight.css")){
+    let tema = document.getElementById("tema")
+    if(tema.href.endsWith("styleLight.css")){
         tema.href = "styleDark.css"
     }
     else{
