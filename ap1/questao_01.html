@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q1</title>
+
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+
+        body{
+            font-family: Arial;
+            margin: 0; /*para ocupar toda a tela*/
+        }
+
+        header {
+            padding: 60px;
+            text-align: center;
+            background: #8A897C;
+            color: white;
+        }
+
+        /*Flexbox principal que contem os flex itens aside e article*/
+        main{
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        aside{
+            flex: 30%;
+            background-color: #D2D7DF;
+            padding: 20px;
+        }
+
+        aside a{
+            text-decoration: none;
+            text-align: center;
+            color: black;
+        }
+
+        aside a:hover {
+            background-color: #353535;
+            color: white;
+        }
+
+        aside ul {
+            list-style-type: none;
+            overflow: hidden;
+        }
+
+        article{
+            flex: 70%;
+            background-color: white;
+            padding: 20px;
+        }
+
+        .img {
+            background-color: #BDBBB0;
+            width: 100%;
+            padding: 20px;
+            height: 300px;
+        }
+
+        footer {
+            padding: 20px;
+            text-align: center;
+            background: #353535;
+            color: white;
+        }
+
+        @media screen and (max-width: 400px) { /* deixa o conteudo da main e os links no estilo coluna para facilitar leitura*/
+            aside li {
+                float: left;
+            }
+            main{
+                flex-direction: column;
+            }
+        }   
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Desenvolvimento de software para web</h1>
+    </header>    
+    
+    <main>
+        <aside>
+            <ul>
+                <li><a href="#">Link1</a></li>
+                <li><a href="#">Link2</a></li>
+                <li><a href="#">Link3</a></li>
+                <li><a href="#">Link4</a></li>
+            </ul>
+        </aside>
+        <article>
+            <h2>Introdução ao HTML</h2>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam voluptas corrupti excepturi unde mollitia minus quasi, quod ratione eos magnam asperiores inventore aliquam quibusdam eaque dicta non. Rerum, ex nam!</p>
+            <div class="img"><img alt="imagem sobre html"></div>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eos, iure, quasi a quibusdam suscipit architecto at blanditiis veniam, inventore numquam facere optio facilis cum cumque delectus repudiandae illum voluptatibus accusamus.</p>
+            <div class="img"><img alt="outra imagem sobre html"></div>
+        </article>
+    </main>
+
+    <footer>
+        <p>tiago.tito@alu.ufc.br</p>
+        <p>2025.1</p>
+        <p>© todos direitos reservados</p>
+    </footer>
+</body>
+</html>

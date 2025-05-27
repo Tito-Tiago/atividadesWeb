@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q2</title>
+
+    <style>
+    table {
+        border-collapse: collapse; /*para as bordas ficarem juntas*/
+        text-align: center;
+        font-family: Arial;
+    }
+
+    th, td {
+        border: 1px solid;
+        padding: 8px;
+    }
+
+    thead th {
+        background-color: #f0f0f0;
+        font-weight: bold;
+    }
+
+    /*muda o bg color das linhas de numero par*/
+    tbody tr:nth-child(even) {
+        background-color: #fafafa;
+    }
+
+    tbody tr:hover {
+        background-color: #e0f7fa;
+    }
+    </style>
+</head>
+<body>
+    
+<table>
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Nome do Produto</th>
+            <th>Categoria</th>
+            <th>Preço (R$)</th>
+            <th>Estoque</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>GPU001</td>
+            <td>NVIDIA GeForce RTX 4080 Super</td>
+            <td>Placa de Vídeo (GPU)</td>
+            <td>7.999,99</td>
+            <td>15</td>
+        </tr>
+        <tr>
+            <td>GPU002</td>
+            <td>AMD Radeon RX 7900 XT</td>
+            <td>Placa de Vídeo (GPU)</td>
+            <td>6.599,99</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>GPU003</td>
+            <td>Intel Arc A770</td>
+            <td>Placa de Vídeo (GPU)</td>
+            <td>2.599,99</td>
+            <td>22</td>
+        </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

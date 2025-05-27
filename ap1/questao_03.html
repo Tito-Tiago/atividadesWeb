@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q3</title>
+
+    <style>
+        main{
+            text-align: center;
+        }
+
+        img{
+            height: 600px;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg" alt="pokemon" id="pokemon"><br>
+        <button onclick="voltar()">Voltar -1</button>
+        <button onclick="adiantar()">Adiantar +1</button>
+    </main>
+
+    <script>
+        const img = document.getElementById("pokemon");
+        const url = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/";
+
+        let id = 1;
+
+        function voltar() {
+            if(id > 1){
+                id--;
+                img.src = url + id + ".svg";
+            }
+        }
+
+        function adiantar() {
+            if(id < 100){
+                id++;
+                img.src = url + id + ".svg";
+            }
+        }
+    </script>
+</body>
+</html>
