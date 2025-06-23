@@ -20,7 +20,7 @@ async function buscarAlunos() {
             const celIra = linha.insertCell()
 
             celNome.textContent = aluno.nome
-            celCurso.textContent = aluno.celCurso
+            celCurso.textContent = aluno.curso
             celIra.textContent = aluno.IRA
 
             sum += aluno.IRA
