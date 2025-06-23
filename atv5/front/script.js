@@ -11,7 +11,7 @@ async function buscarAlunos() {
     const alunos = await res.json();
 
     const table = document.createElement("table")
-        let sum = 0;
+        let sum = 0
         alunos.forEach(
         (aluno) => {
             const linha = table.insertRow()
@@ -28,10 +28,11 @@ async function buscarAlunos() {
         )
 
         const linhaIra = table.insertRow()
-        const celIra = linhaIra.insertCell();
+        const cellMedia = linhaIra.insertCell();
+        const celIra = linhaIra.insertCell(); 
 
-        linhaIra.textContent = sum / alunos.lenght
-
+        cellMedia.textContent = 'Média'
+        celIra.textContent = (sum / alunos.length).toFixed(2)
 
         const divTable = document.getElementById("table-container")
         divTable.appendChild(table)
