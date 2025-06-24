@@ -7,27 +7,41 @@ const app = express();
 app.use(cors());
 
 const alunos = [
-  {
-    nome: "Maria Ana",
-    curso: "SI",
-    IRA: 7
-  },
-  {
-    nome: "José Marcelo",
-    curso: "ES",
-    IRA: 4.5
-  },
-  {
-    nome: "Francisca Ana",
-    curso: "DD",
-    IRA: 9.7
-  }
+  // {
+  //   matricula: 556322,
+  //   nome: "Maria Ana",
+  //   IRA: 7
+  // },
+  // {
+  // },
+  // {
+  // }
 ];
 
-app.get('/alunos', (req, res) => {
-  res.json(alunos);
-});
+app.get('/alunos', 
+  (req, res) => {
+    res.json(alunos);
+  }
+);
 
-app.listen(3000, () => {
-  console.log("Servidor rodando");
-});
+app.post('/alunos',
+  (req, res) => {
+    const novoAluno = req.body
+    alunos.push(novoAluno);
+    res.status(201).json(novoAluno);
+  }
+);
+
+app.patch('/alunos', 
+  (req, res) => {
+    const novoAluno = req.body
+    alunoExiste = alunos.find(aluno => novoAluno.matricula === aluno.matricula)
+    
+  }
+)
+
+app.listen(3000, 
+  () => {
+    console.log("Servidor rodando");
+  }
+); 
