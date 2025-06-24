@@ -35,8 +35,18 @@ app.post('/alunos',
 app.patch('/alunos', 
   (req, res) => {
     const novoAluno = req.body
-    alunoExiste = alunos.find(aluno => novoAluno.matricula === aluno.matricula)
-    
+    indexAlunoExiste = alunos.findIndex(aluno => novoAluno.matricula === aluno.matricula)
+
+    alunos[indexAlunoExiste] = novoAluno
+  }
+)
+
+app.delete('/alunos', 
+  (req, res) => {
+    const aluno = req.body
+    indexAlunoExiste = alunos.findIndex(aluno => novoAluno.matricula === aluno.matricula)
+
+    alunos[indexAlunoExiste] = novoAluno
   }
 )
 
