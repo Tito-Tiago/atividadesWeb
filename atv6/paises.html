@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>COVID-19 Países</title>
+    <style>
+        body { font-family: sans-serif; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #dddddd; text-align: left; padding: 8px; }
+        thead { background-color: #f2f2f2; }
+        .destaque-brasil { background-color: #d4edda; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <table id="tabela-paises">
+        <thead>
+            <tr>
+                <th>Nome do país</th>
+                <th>Número de Casos</th>
+                <th>Número de Falecimentos</th>
+            </tr>
+        </thead>
+        <tbody id="corpo-tabela">
+            </tbody>
+    </table>
+
+    <script>
+        async function buscarDadosDosPaises() {
+            try {
+                const resposta = await fetch("https://covid19-brazil-api.now.sh/api/report/v1/countries");
+                const dados = await resposta.json();
+                
+                const corpoTabela = document.getElementById("corpo-tabela");
+                
+                dados.data.forEach(pais => {
+                    const linha = document.createElement("tr");
+                    
+                    linha.innerHTML = `
+                        <td>${pais.country}</td>
+                        <td>${(pais.confirmed || 0).toLocaleString('pt-BR')}</td>
+                        <td>${(pais.deaths || 0).toLocaleString('pt-BR')}</td>
+                    `;
+                    
+                    if (pais.country === "Brazil") {
+                        linha.classList.add('destaque-brasil');
+                    }
+                    
+                    corpoTabela.appendChild(linha);
+                });
+
+            } catch (erro) {
+                console.error("Falha ao buscar dados dos países:", erro);
+                document.getElementById("corpo-tabela").innerHTML = '<tr><td colspan="3">Não foi possível carregar os dados. Tente novamente mais tarde.</td></tr>';
+            }
+        }
+
+        buscarDadosDosPaises();
+    </script>
+</body>
+</html>

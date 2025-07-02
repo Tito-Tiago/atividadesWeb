@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>COVID-19 Brasil</title>
+    <style>
+        body { font-family: sans-serif; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #dddddd; text-align: left; padding: 8px; }
+        thead { background-color: #f2f2f2; }
+        tfoot { font-weight: bold; }
+        .destacar-mortes { background-color: #ffcccc; }
+        .destacar-relacao-max { background-color: #ccffcc; }
+        .destacar-relacao-min { background-color: #ffffcc; }
+    </style>
+</head>
+<body>
+    <table id="tabela-estados">
+        <thead>
+            <tr>
+                <th>Nome do Estado</th>
+                <th>Abreviação</th>
+                <th>Número de Casos</th>
+                <th>Número de Suspeitos</th>
+                <th>Número de Falecimentos</th>
+                <th>Relação Casos/Falecimentos (mortes por caso)</th>
+            </tr>
+        </thead>
+        <tbody id="corpo-tabela">
+        </tbody>
+        <tfoot id="rodape-tabela">
+        </tfoot>
+    </table>
+    <div id="analise-dados">
+        <p id="analise-max"></p>
+        <p id="analise-min"></p>
+    </div>
+
+    <script>
+        async function buscarDadosEstados() {
+            try {
+                const resposta = await fetch("https://covid19-brazil-api.now.sh/api/report/v1");
+                const dados = await resposta.json();
+                
+                const corpoTabela = document.getElementById("corpo-tabela");
+                const rodapeTabela = document.getElementById("rodape-tabela");
+                
+                let totalCasos = 0;
+                let totalSuspeitos = 0;
+                let totalMortes = 0;
+
+                let maximaRelacao = { valor: -1, estado: '' };
+                let minimaRelacao = { valor: Infinity, estado: '' };
+
+                dados.data.forEach(estado => {
+                    totalCasos += estado.cases;
+                    totalSuspeitos += estado.suspects;
+                    totalMortes += estado.deaths;
+
+                    const relacao = (estado.cases / estado.deaths).toFixed(2);
+                    
+                    const linha = document.createElement("tr");
+                    linha.innerHTML = `
+                        <td>${estado.state}</td>
+                        <td>${estado.uf}</td>
+                        <td>${estado.cases.toLocaleString('pt-BR')}</td>
+                        <td>${estado.suspects.toLocaleString('pt-BR')}</td>
+                        <td class="celula-mortes">${estado.deaths.toLocaleString('pt-BR')}</td>
+                        <td class="celula-relacao">${relacao > 0 ? relacao : "N/A"}</td>
+                    `;
+                    corpoTabela.appendChild(linha);
+
+                    const relacaoNumerica = parseFloat(relacao);
+                    if (relacaoNumerica > maximaRelacao.valor) {
+                        maximaRelacao.valor = relacaoNumerica;
+                        maximaRelacao.estado = estado.state;
+                    }
+                    if (relacaoNumerica > 0 && relacaoNumerica < minimaRelacao.valor) { 
+                        minimaRelacao.valor = relacaoNumerica;
+                        minimaRelacao.estado = estado.state;
+                    }
+                });
+
+                const numeroDeEstados = dados.data.length;
+                const mediaCasos = totalCasos / numeroDeEstados;
+                const mediaSuspeitos = totalSuspeitos / numeroDeEstados;
+                const mediaMortes = totalMortes / numeroDeEstados;
+
+                rodapeTabela.innerHTML = `
+                    <tr>
+                        <td colspan="2">MÉDIA GERAL</td>
+                        <td>${mediaCasos.toLocaleString('pt-BR', { maximumFractionDigits: 0 })}</td>
+                        <td>${mediaSuspeitos.toLocaleString('pt-BR', { maximumFractionDigits: 0 })}</td>
+                        <td>${mediaMortes.toLocaleString('pt-BR', { maximumFractionDigits: 0 })}</td>
+                        <td>-</td>
+                    </tr>
+                `;
+
+                const linhas = corpoTabela.getElementsByTagName('tr');
+                for (let i = 0; i < linhas.length; i++) {
+                    const celulaMortes = linhas[i].querySelector('.celula-mortes');
+                    const contagemMortes = parseFloat(celulaMortes.textContent.replace(/\./g, '').replace(',', '.'));
+                    if (contagemMortes > mediaMortes) {
+                        linhas[i].classList.add('destacar-mortes');
+                    }
+
+                    const celulaRelacao = linhas[i].querySelector('.celula-relacao');
+                    const relacaoValor = parseFloat(celulaRelacao.textContent);
+                    if (relacaoValor === maximaRelacao.valor) {
+                        linhas[i].classList.add('destacar-relacao-max');
+                    }
+                    if (relacaoValor === minimaRelacao.valor) {
+                        linhas[i].classList.add('destacar-relacao-min');
+                    }
+                }
+
+                document.getElementById('analise-max').innerHTML = `<b>Maior relação Casos/Falecimentos:</b> ${maximaRelacao.estado} (${maximaRelacao.valor.toLocaleString('pt-BR')})`;
+                document.getElementById('analise-min').innerHTML = `<b>Menor relação Casos/Falecimentos:</b> ${minimaRelacao.estado} (${minimaRelacao.valor.toLocaleString('pt-BR')})`;
+
+            } catch (erro) {
+                console.error("Falha ao buscar dados dos estados:", erro);
+                document.getElementById("corpo-tabela").innerHTML = '<tr><td colspan="6">Não foi possível carregar os dados. Tente novamente mais tarde.</td></tr>';
+            }
+        }
+
+        buscarDadosEstados();
+    </script>
+</body>
+</html>
