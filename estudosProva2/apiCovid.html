@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        table {
+           border-collapse: collapse;
+           width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+        }
+
+        .menorRatio {
+            background-color: green;
+        }
+    </style>
+
+</head>
+<body>
+
+    <table>
+        <thead>
+            <th>UF</th>
+            <th>casos</th>
+            <th>suspeitos</th>
+            <th>mortes</th>
+            <th>casos/mortes</th>
+        </thead>
+
+        <tbody id="body">
+
+        </tbody>
+    </table>
+    
+
+    <script>
+        async function carregarDados() {
+            const res = await fetch("https://covid19-brazil-api.now.sh/api/report/v1")
+            const json = await res.json();
+
+            const corpoTabela = document.getElementById("body")
+            
+            let menorRatio = Infinity;
+            let linhaMenorRatio;
+
+            json.data.forEach(estado => {
+                const linha = document.createElement("tr")
+
+                const ratio = estado.cases / estado.deaths
+
+                if(ratio < menorRatio) {
+                    linhaMenorRatio = linha;
+                    menorRatio = ratio
+                }
+
+                linha.innerHTML = `
+                    <td> ${estado.uf} </td>
+                    <td> ${estado.cases} </td>
+                    <td> ${estado.suspects} </td>
+                    <td> ${estado.deaths} </td>
+                    <td> ${ratio.toFixed(2)} </td>
+                `
+
+                corpoTabela.appendChild(linha)
+            });
+
+            linhaMenorRatio.classList.add("menorRatio")
+
+        }
+
+        carregarDados()
+
+    </script>
+</body>
+</html>
